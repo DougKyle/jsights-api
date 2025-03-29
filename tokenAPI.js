@@ -10,23 +10,21 @@ app.get('/', (req, res) => {
 
 app.get('/tokeninfo', async (req, res) => {
   const symbol = req.query.symbol?.toUpperCase();
-const apiKey = process.env.CMC_PRO_API_KEY;
+  const apiKey = process.env.CMC_PRO_API_KEY;
 
-
-try {
-  console.log("Making API request with:", {
+  console.log("📦 DEBUG ENV:", {
     symbol,
-    apiKey,
-    headers: { 'X-CMC_PRO_API_KEY': apiKey }
+    apiKey: process.env.CMC_PRO_API_KEY,
+    env: process.env
   });
 
- const response = await axios.get('https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest', {
-  headers: { 'X-CMC_PRO_API_KEY': apiKey },
-  params: { symbol },
-});
+  try {
+    const response = await axios.get('https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest', {
+      headers: { 'X-CMC_PRO_API_KEY': apiKey },
+      params: { symbol },
+    });
 
-
-   const token = response.data.data[symbol];
+    const token = response.data.data[symbol];
 
     if (!token) {
       return res.status(404).json({ error: `Token ${symbol} not found` });
