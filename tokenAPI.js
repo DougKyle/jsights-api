@@ -12,8 +12,14 @@ app.get('/tokeninfo', async (req, res) => {
   const symbol = req.query.symbol?.toUpperCase();
   const apiKey = process.env.CMC_API_KEY;
 
-  try {
-    const response = await axios.get('https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest', {
+try {
+  console.log("Making API request with:", {
+    symbol,
+    apiKey,
+    headers: { 'X-CMC_PRO_API_KEY': apiKey }
+  });
+
+ const response = await axios.get('https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest', {
   headers: { 'X-CMC_PRO_API_KEY': apiKey },
   params: { symbol },
 });
