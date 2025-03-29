@@ -75,9 +75,10 @@ app.get('/tokeninfo', async (req, res) => {
     });
 
   } catch (err) {
-    console.error("API Error:", err.message);
-    res.status(500).json({ error: "Internal server error" });
-  }
+  console.error("API Error:", err.response?.data || err.message);
+  res.status(500).json({ error: "Internal server error" });
+}
+
 });
 
 app.listen(PORT, () => {
