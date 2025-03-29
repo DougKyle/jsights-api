@@ -4,6 +4,10 @@ const axios = require('axios');
 const app = express();
 const PORT = 3000;
 
+app.get('/', (req, res) => {
+  res.send('jSightsAI API is live and listening 🚀');
+});
+
 app.get('/tokeninfo', async (req, res) => {
   const symbol = req.query.symbol?.toUpperCase();
   const apiKey = process.env.CMC_API_KEY;
