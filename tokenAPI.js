@@ -10,7 +10,8 @@ app.get('/', (req, res) => {
 
 app.get('/tokeninfo', async (req, res) => {
   const symbol = req.query.symbol?.toUpperCase();
-  const apiKey = process.env.CMC_API_KEY;
+const apiKey = process.env.CMC_PRO_API_KEY;
+
 
 try {
   console.log("Making API request with:", {
